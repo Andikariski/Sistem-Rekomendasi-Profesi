@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rekomendasi Profesi IT</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <!-- Opsional -->
+    <style>
+      /* CSS untuk menyusun checkbox dalam tiga kolom */
+      .checkbox-group {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 3 kolom */
+        gap: 10px; /* Jarak antar kolom */
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .checkbox-group label {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Rekomendasi Profesi IT</h1>
+      <form method="POST" id="skillsForm">
+        <p>Pilih keterampilan Anda:</p>
+        <div class="checkbox-group">
+          {% for skill in skills %}
+          <label>
+            <input type="checkbox" name="skills" value="{{ skill }}" /> {{ skill
+            }}
+          </label>
+          {% endfor %}
+        </div>
+        <button type="submit" id="submitButton">Submit</button>
+      </form>
+
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+
+      <div id="recommendation-section">
+        <h2>Hasil Rekomendasi (Top 3):</h2>
+        <ul>
+          {% if recommendations %} {% for profession, similarity in
+          recommendations %}
+          <li>{{ profession }}: Similarity {{ similarity|round(2) }}</li>
+          {% endfor %} {% else %}
+          <p>Tidak ada rekomendasi yang tersedia.</p>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+    <script>
+      // JavaScript untuk menampilkan hasil rekomendasi setelah form disubmit
+    </script>
+  </body>
+</html>
